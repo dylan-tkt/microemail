@@ -7,7 +7,7 @@ class NewUserTemplateContext(BaseModel):
     """ The values which will be used to generate the html body from new user template. """
 
     first_name: str = Field(
-        None,
+        (...),
         title='First name of the user who we will send an email to',
         max_length=80,
         example='Bartholomew'
@@ -25,13 +25,13 @@ class ResetPasswordTemplateContext(BaseModel):
     """ The values to be used to generate the html body from password reset template. """
 
     uid: str = Field(
-        None,
+        (...),
         title='urlsafe_base64_encode of the user id in bytes',
         max_length=20,
         example='MyT'
     )
     token: str = Field(
-        None,
+        (...),
         title='default_token_generator.make_token for user',
         max_length=50,
         example='cgcnha-535d6ca5aba5679f273a9cbb87319b2d'
