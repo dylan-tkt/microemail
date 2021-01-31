@@ -1,5 +1,3 @@
-from typing import List, Dict
-from enum import Enum
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -17,7 +15,7 @@ class NewUserTemplateContext(BaseModel):
 class NewUserInput(BaseModel):
     """ These values must be sent to new user notification endpoint. """
 
-    to_addr: EmailStr
+    recipient: EmailStr
     context: NewUserTemplateContext
 
 
@@ -41,17 +39,5 @@ class ResetPasswordTemplateContext(BaseModel):
 class ResetPasswordInput(BaseModel):
     """ These values must be sent to reset password notification endpoint. """
 
-    to_addr: EmailStr
+    recipient: EmailStr
     context: ResetPasswordTemplateContext
-
-
-class EmailReadyToSend(BaseModel):
-    """ A prepared email that can be sent"""
-
-    to_addrs: List[EmailStr]
-    from_addr: EmailStr
-    subject: str
-    context: Dict[str, str]
-    cc: List[str] = []
-    bcc: List[str] = []
-    attachments: List[bytes] = []
