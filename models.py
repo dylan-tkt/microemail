@@ -41,3 +41,9 @@ class ResetPasswordInput(BaseModel):
 
     recipient: EmailStr
     context: ResetPasswordTemplateContext
+
+
+class MailOutput(BaseModel):
+    """ Just simple JSON resp from our endpoints """
+
+    message: str

@@ -8,7 +8,7 @@ from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 import logging
 import os
 
-from models import NewUserInput, ResetPasswordInput
+from models import NewUserInput, ResetPasswordInput, MailOutput
 
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 templates = Jinja2Templates(directory='templates')
@@ -30,7 +30,7 @@ fm = FastMail(conf)
 FRONT_URL = 'http://example.com'
 
 
-@app.post('/new-user/', response_model=NewUserInput)
+@app.post('/new-user/', response_model=MailOutput)
 async def new_user(data: NewUserInput):
     """ Send email welcoming a new user. """
 
@@ -49,7 +49,7 @@ async def new_user(data: NewUserInput):
     return JSONResponse(status_code=200, content={'message': 'email has been sent'})
 
 
-@app.post('/password-reset/', response_model=ResetPasswordInput)
+@app.post('/password-reset/', response_model=MailOutput)
 async def password_reset(data: ResetPasswordInput):
     """ Send an email with a link to reset the user's password. """
 
